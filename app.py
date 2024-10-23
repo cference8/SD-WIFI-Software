@@ -9,23 +9,23 @@ ctk.set_default_color_theme("blue")  # Themes: "blue" (default), "green", "dark-
 # Create the main window
 app = ctk.CTk()
 app.title("Machine Staging")
-app.geometry("600x600")
+app.geometry("550x560")
 
 # Function to switch frames
 def switch_frame(frame):
     frame.tkraise()
 
 # Frame 1 - Machine Selection
-frame1 = ctk.CTkFrame(app)
-frame1.grid(row=0, column=0, sticky="nsew")
+frame1 = ctk.CTkFrame(app, width=400, height=500)
+frame1.grid(row=0, column=0, sticky="nsew", padx=(40,0))
 
 # Frame 2 - File Uploads (One Column Layout)
-frame2 = ctk.CTkFrame(app)
-frame2.grid(row=0, column=0, sticky="nsew")
+frame2 = ctk.CTkFrame(app, width=400, height=500)
+frame2.grid(row=0, column=0, sticky="nsew", padx=(40,0))
 
 # Frame 3 - Scrollable Frame for File Assignment Display
-frame3 = ctk.CTkFrame(app)
-frame3.grid(row=0, column=0, sticky="nsew")
+frame3 = ctk.CTkFrame(app, width=400, height=500)
+frame3.grid(row=0, column=0, sticky="nsew", padx=(40,0))
 
 # ---- Frame 1: Machine Selection ----
 
@@ -67,34 +67,34 @@ def upload_letter_files():
 
 # Upload Buttons and File Display (Single Column)
 upload_envelope_button = ctk.CTkButton(frame2, text="Select Envelope Files", command=upload_envelope_files)
-upload_envelope_button.grid(row=0, column=0, padx=20, pady=20, sticky="w")
+upload_envelope_button.grid(row=0, column=1, padx=20, pady=20, sticky="ew")
 
 envelope_label_title = ctk.CTkLabel(frame2, text="Selected Envelope Files", font=("Arial", 14))
-envelope_label_title.grid(row=1, column=0, padx=20, pady=10, sticky="w")
+envelope_label_title.grid(row=1, column=1, padx=20, pady=10, sticky="ew")
 
 envelope_label = ctk.CTkLabel(frame2, text="No files selected", font=("Arial", 12))
-envelope_label.grid(row=2, column=0, padx=20, pady=10, sticky="w")
+envelope_label.grid(row=2, column=1, padx=20, pady=10, sticky="ew")
 
 upload_letter_button = ctk.CTkButton(frame2, text="Select Letter Files", command=upload_letter_files)
-upload_letter_button.grid(row=3, column=0, padx=20, pady=20, sticky="w")
+upload_letter_button.grid(row=3, column=1, padx=20, pady=20, sticky="ew")
 
 letter_label_title = ctk.CTkLabel(frame2, text="Selected Letter Files", font=("Arial", 14))
-letter_label_title.grid(row=4, column=0, padx=20, pady=10, sticky="w")
+letter_label_title.grid(row=4, column=1, padx=20, pady=10, sticky="ew")
 
 letter_label = ctk.CTkLabel(frame2, text="No files selected", font=("Arial", 12))
-letter_label.grid(row=5, column=0, padx=20, pady=10, sticky="w")
+letter_label.grid(row=5, column=1, padx=20, pady=10, sticky="ew")
 
 # Submit button to go to the third frame and display assigned files
 submit_button_frame2 = ctk.CTkButton(frame2, text="Submit", command=lambda: [display_file_assignments(), switch_frame(frame3)])
-submit_button_frame2.grid(row=6, column=0, padx=20, pady=20)
+submit_button_frame2.grid(row=6, column=1, padx=20, pady=20, sticky="ew")
 
 # Back Button to return to Frame 1
 back_button = ctk.CTkButton(frame2, text="Back", command=lambda: switch_frame(frame1))
-back_button.grid(row=7, column=0, padx=20, pady=30)
+back_button.grid(row=7, column=1, padx=20, pady=30, sticky="ew")
 
 # ---- Frame 3: Scrollable File Assignment Display ----
 
-scrollable_frame = ctk.CTkScrollableFrame(frame3, width=580, height=500)
+scrollable_frame = ctk.CTkScrollableFrame(frame3, width=400, height=500)
 scrollable_frame.grid(row=0, column=0, padx=20, pady=20)
 
 # Function to display the file assignments to selected machines
