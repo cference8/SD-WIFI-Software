@@ -392,7 +392,7 @@ def get_machine_folder_path(machine_num):
     machine_folder_path = os.path.join(base_path, folder_name)
     return machine_folder_path
 
-# Function to transfer files to machines
+# Modified function to transfer files to machines
 def transfer_files_to_machines():
     for machine_num, file_path in file_assignments:
         if file_path is None:
@@ -403,6 +403,20 @@ def transfer_files_to_machines():
         if not os.path.exists(destination_folder):
             messagebox.showerror("Error", f"Destination folder does not exist for Machine {machine_num}:\n{destination_folder}")
             continue
+
+        # Before transferring the new file, delete any .bin files in the destination folder
+        try:
+            # List all files in the destination folder
+            for filename in os.listdir(destination_folder):
+                if filename.endswith(".bin"):
+                    file_to_delete = os.path.join(destination_folder, filename)
+                    os.remove(file_to_delete)
+                    print(f"Deleted existing .bin file: {file_to_delete}")
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to delete existing .bin files in Machine {machine_num}'s folder:\n{e}")
+            continue
+
+        # Now proceed to copy the new file
         destination_path = os.path.join(destination_folder, os.path.basename(file_path))
         try:
             # Copy the file
@@ -418,7 +432,7 @@ def back_to_frame2():
     switch_frame(frame2)
 
 # Add the Transfer Files button and Back button at the bottom of Frame 3
-back_button = ctk.CTkButton(frame3,text="Back",command=back_to_frame2)
+back_button = ctk.CTkButton(frame3, text="Back", command=back_to_frame2)
 back_button.grid(row=1, column=0, padx=(20, 10), pady=20, sticky="ew")
 
 transfer_button = ctk.CTkButton(
