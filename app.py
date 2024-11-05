@@ -99,11 +99,11 @@ available_checkbox.grid(row=5, column=2, sticky="w", pady=5)
 # Function to toggle check/uncheck all machines
 def toggle_all_machines():
     # Check if all machines are selected
-    all_selected = all(machine_states[machine_num].get() == 1 for machine_num in range(1, 12))
+    all_selected = all(machine_states[machine_num].get() == 1 for machine_num in range(1, 10))
     
     # Toggle based on current state
     new_state = 0 if all_selected else 1  # Set to 0 if all selected, otherwise set to 1
-    for machine_num in range(1, 12):
+    for machine_num in range(1, 10):
         machine_states[machine_num].set(new_state)  # Set each machine to new state
         update_image_funcs[machine_num]()           # Update the image
 
@@ -147,7 +147,7 @@ for i in range(1, 31):
         continue  # Skip to the next iteration
 
     # For disabled machines, create a grayed-out image
-    if i >= 12:
+    if i >= 10:
         # Convert to grayscale to indicate disabled
         disabled_image = ImageOps.grayscale(normal_image)
         disabled_ctk_image = ctk.CTkImage(light_image=disabled_image, dark_image=disabled_image,
@@ -261,7 +261,7 @@ def make_update_image(machine_num):
 # Function to handle image click events
 def on_image_click(event, machine_num):
     # Only toggle if the machine is not disabled
-    if machine_num < 12:
+    if machine_num < 10:
         # Toggle the variable
         current_value = machine_states[machine_num].get()
         machine_states[machine_num].set(0 if current_value else 1)
@@ -294,7 +294,7 @@ for row_index, row in enumerate(layout, start=3):  # Start from row 3 to accommo
         checkbox = ctk.CTkCheckBox(frame1, text=f"Machine {machine_num}", variable=var, command=update_image_func)
         checkbox.grid(row=row_index*2, column=col_index, padx=20, pady=5, sticky="n")
 
-        if machine_num >= 12:
+        if machine_num >= 10:
             # Disable the checkbox
             checkbox.configure(state="disabled")
             # Disable image click
