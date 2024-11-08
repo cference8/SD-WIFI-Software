@@ -598,9 +598,9 @@ destination_directories = [
     Path(r"\\192.168.68.78\DavWWWRoot"),
     Path(r"\\192.168.68.79\DavWWWRoot"),
     Path(r"\\192.168.68.80\DavWWWRoot"),
-    Path(r"\\192.168.68.70\DavWWWRoot"),
-    Path(r"\\192.168.68.82\DavWWWRoot"),
     Path(r"\\192.168.68.83\DavWWWRoot"),
+    Path(r"\\192.168.68.82\DavWWWRoot"),
+    Path(r"\\192.168.68.70\DavWWWRoot"),
     Path(r"\\192.168.68.84\DavWWWRoot")
 ]
 
@@ -793,6 +793,7 @@ def delete_bin_files():
 def back_to_frame2():
     global fileErrors
     fileErrors.clear()  # Clear fileErrors when navigating back to Frame 2
+    hide_popup(green_popup)
     switch_frame(frame2)
 
 
